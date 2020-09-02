@@ -46,21 +46,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth:web']], function () {
 
-    //user having abilities of creating post only user these routes
+    //user having abilities of creating post only uses these routes
     Route::group(['middleware' => ['can:create']], function () {
         Route::any('/post/create','postController@create')->name('post.create');
         Route::post('/post','postController@store')->name('post.store');
         Route::get('/post','postController@index')->name('post.index');
 
     });
-     //user having abilities of edit post only user these routes
+     //user having abilities of edit post only uses these routes
     Route::group(['middleware' => ['can:edit']], function () {
 
         Route::any('/post/{post}','postController@update')->name('post.update');
         Route::get('/post/{post}/edit','postController@edit')->name('post.edit');
         Route::get('/post','postController@index')->name('post.index');
     });
-     //user having abilities of delete post only user these routes
+     //user having abilities of delete post only uses these routes
     Route::group(['middleware' => ['can:destroy']], function () {
         Route::any('/post/{post}','postController@destroy')->name('post.destroy');
         Route::get('/post','postController@index')->name('post.index');
